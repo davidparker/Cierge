@@ -57,8 +57,8 @@ namespace Cierge.Controllers
                 Email = user.Email,
                 EmailConfirmed = user.EmailConfirmed,
                 FullName = user.FullName,
-
-                FavColor = user.FavColor // !! ADDING FIELDS: If you want users to be able to edit field
+                MobileNumber = user.MobileNumber,
+                SendCodesViaSms = user.SendCodesViaSms
             };
 
             return View(model);
@@ -86,8 +86,8 @@ namespace Cierge.Controllers
 
             user.UserName = model.UserName;
             user.FullName = model.FullName;
-
-            user.FavColor = model.FavColor; // !! ADDING FIELDS: If you want users to be able to edit field
+            user.SendCodesViaSms = model.SendCodesViaSms;
+            user.MobileNumber = user.MobileNumber;
 
             // If the user's email is confirmed (ie. local login) and they provided a different email that exists, set it to the primary
             if (user.EmailConfirmed &&

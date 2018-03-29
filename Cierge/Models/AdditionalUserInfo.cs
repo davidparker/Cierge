@@ -7,7 +7,9 @@ namespace Cierge.Models
         string UserName { get; set; }
         string FullName { get; set; }
 
-        string FavColor { get; set; } // !! ADDING FIELDS: If you want field to exist
+        string MobileNumber { get; set; } 
+        
+        bool SendCodesViaSms { get; set; }
     }
 
     public class AdditionalUserInfo : IAdditionalUserInfo
@@ -21,13 +23,12 @@ namespace Cierge.Models
         [StringLength(20, ErrorMessage = "Your name can't be more than 20 characters.")]
         public string FullName { get; set; }
 
+        [Display(Name = "Mobile Number", Prompt = "optional")]
+        [MinLength(10)]
+        public string MobileNumber { get; set; }
 
-        // !! ADDING FIELDS: If If you want field to exist
-        //                   Attributes used for registering & profile editing pages
-
-        [Display(Name = "Favourite Color", Prompt = "optional")]
-        [MinLength(2)]
-        public string FavColor { get; set; }  
+        [Display(Name = "Send login codes via sms")]
+        public bool SendCodesViaSms { get; set; }
 
     }
 }

@@ -511,12 +511,11 @@ namespace Cierge.Controllers
                 SecurityStamp = TemporarySecurityStamp,
 
                 FullName = model.FullName,
-                FavColor = model.FavColor, // !! ADDING FIELDS: If you want users to input field on register
+                MobileNumber = model.MobileNumber,
+                SendCodesViaSms = model.SendCodesViaSms
             };
 
             userEmpty.Email = email;
-
-            //userEmpty.FavColor = "Red"; // !! ADDING FIELDS: If you want to set default value for all registering users
 
             if (info == null) // User trying to register locally
             {
@@ -556,6 +555,8 @@ namespace Cierge.Controllers
                     if (_userManager.Users.Count() == 1)
                     {
                         var makeAdminResult = await _userManager.AddToRoleAsync(user, "Administrator");
+                    } else {
+                        var makeNormalUser = await _userManager.AddToRoleAsync(user, "User");
                     }
 
                     await _events.AddEvent(AuthEventType.Register, JsonConvert.SerializeObject(new

@@ -38,11 +38,10 @@ namespace AuthorizationServer.Controllers
             }
 
             var claims = new JObject();
-            
-            // !! ADDING FIELD: this will include FavColor in the OIDC userinfo endpoint
-            var favColor = user.FavColor?.ToString() ?? "";
-            claims.Add("favColor", favColor);
 
+            var mobileNum = user.MobileNumber?.ToString() ?? "";
+            claims.Add("mobileNumber", mobileNum);
+            
             // Note: the "sub" claim is a mandatory claim and must be included in the JSON response.
             claims[OpenIdConnectConstants.Claims.Subject] = await _userManager.GetUserIdAsync(user);
 

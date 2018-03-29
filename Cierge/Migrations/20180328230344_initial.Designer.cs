@@ -11,9 +11,10 @@ using System;
 namespace Cierge.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180328230344_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,13 +38,13 @@ namespace Cierge.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
+                    b.Property<string>("FavColor");
+
                     b.Property<string>("FullName");
 
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
-
-                    b.Property<string>("MobileNumber");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
@@ -58,8 +59,6 @@ namespace Cierge.Migrations
                     b.Property<bool>("PhoneNumberConfirmed");
 
                     b.Property<string>("SecurityStamp");
-
-                    b.Property<bool>("SendCodesViaSms");
 
                     b.Property<bool>("TwoFactorEnabled");
 

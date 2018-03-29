@@ -99,10 +99,11 @@ namespace Cierge.Controllers
 
             var identity = (ClaimsIdentity)principal.Identity;
 
-            // !! ADDING FIELD: this will include FavColor in generated JWT access tokens & id tokens
-            var favColorClaim = new Claim("favColor", user.FavColor?.ToString() ?? "", ClaimValueTypes.String);
-            favColorClaim.SetDestinations(OpenIdConnectConstants.Destinations.AccessToken, OpenIdConnectConstants.Destinations.IdentityToken);
-            identity.AddClaim(favColorClaim);
+            if(!string.IsNullOrEmpty(user.MobileNumber)){
+                var mobileNumberClaim = new Claim("mobileNumber", user.MobileNumber?.ToString() ?? "", ClaimValueTypes.String);
+                mobileNumberClaim.SetDestinations(OpenIdConnectConstants.Destinations.AccessToken, OpenIdConnectConstants.Destinations.IdentityToken);
+                identity.AddClaim(mobileNumberClaim);
+            }
 
             // Create a new authentication ticket holding the user identity.
             var ticket = new AuthenticationTicket(principal,
