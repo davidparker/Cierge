@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NetSo.Data
+namespace NetSo.Models
 {
     public class AuthEvent : AuthEvent<string>
     {

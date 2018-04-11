@@ -1,16 +1,17 @@
-﻿using System.Security.Claims;
-using System.Threading.Tasks;
-using AspNet.Security.OAuth.Validation;
-using AspNet.Security.OpenIdConnect.Primitives;
-using NetSo.Data;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
-using OpenIddict.Core;
-
-namespace AuthorizationServer.Controllers
+﻿namespace AuthorizationServer.Controllers
 {
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+    using AspNet.Security.OAuth.Validation;
+    using AspNet.Security.OpenIdConnect.Primitives;
+    using NetSo.Data;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Newtonsoft.Json.Linq;
+    using OpenIddict.Core;
+    using NetSo.Models;
+    
     [Route("api")]
     public class UserinfoController : Controller
     {

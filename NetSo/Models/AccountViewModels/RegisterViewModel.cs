@@ -14,5 +14,9 @@ namespace NetSo.Models.AccountViewModels
 
         public string ReturnUrl { get; set; }
 
+        public string Company { get; set; }
+
+        public string Site { get; set; }
+
     }
 }

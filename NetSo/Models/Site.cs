@@ -13,6 +13,10 @@ namespace NetSo.Models
 
         public string Url { get; set; }
 
+        public string HostName { get; set; }
+
+        public bool HasClients{ get; set; }
+
         public ICollection<Client> Clients { get; set; }
 
     }

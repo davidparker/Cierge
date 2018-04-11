@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 using NetSo.Models;
 
-namespace NetSo.Data
+namespace NetSo.Models
 {
     public class ApplicationUser : IdentityUser, IAdditionalUserInfo
     {

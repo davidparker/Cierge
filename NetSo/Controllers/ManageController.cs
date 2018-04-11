@@ -1,18 +1,19 @@
-﻿using System.Linq;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using NetSo.Data;
-using NetSo.Models.ManageViewModels;
-using NetSo.Services;
-
-namespace NetSo.Controllers
+﻿namespace NetSo.Controllers
 {
+    using System.Linq;
+    using System.Text.Encodings.Web;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.Logging;
+    using Newtonsoft.Json;
+    using NetSo.Data;
+    using NetSo.Models.ManageViewModels;
+    using NetSo.Services;
+    using NetSo.Models;
+
     [Authorize]
     [Route("[controller]/[action]")]
     public class ManageController : Controller

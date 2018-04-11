@@ -10,6 +10,7 @@ namespace NetSo.Data
         public DbSet<AuthEvent> AuthEvents { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Site> Sites { get; set;  }
+        public DbSet<UserSiteAssignment> UserSiteAssignments { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -19,10 +20,7 @@ namespace NetSo.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            // Customize the ASP.NET Identity model and override the defaults if needed.
-            // For example, you can rename the ASP.NET Identity table names and more.
-            // Add your customizations after calling base.OnModelCreating(builder);
-
+            
             builder.Entity<ApplicationUser>()
             .HasIndex(nameof(ApplicationUser.Email))
             .IsUnique(false);
@@ -32,6 +30,16 @@ namespace NetSo.Data
                 .WithMany(u => u.Events)
                 .HasForeignKey(e => e.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<UserSiteAssignment>()
+            .HasOne(s => s.Site);
+
+            builder.Entity<UserSiteAssignment>()
+            .HasOne(x => x.Client);
+
+            builder.Entity<UserSiteAssignment>()
+            .HasOne(x => x.User);
+
         }
 
     }

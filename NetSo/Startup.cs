@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Rewrite;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Collections.Generic;
+using NetSo.Models;
 
 namespace NetSo
 {

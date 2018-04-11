@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NetSo.Data;
+using NetSo.Models;
 using NetSo.Models.HomeViewModels;
 
 namespace NetSo.Controllers

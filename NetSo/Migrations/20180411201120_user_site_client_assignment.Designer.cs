@@ -11,9 +11,10 @@ using System;
 namespace NetSo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180411201120_user_site_client_assignment")]
+    partial class user_site_client_assignment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -276,7 +277,7 @@ namespace NetSo.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserSiteAssignments");
+                    b.ToTable("UUserSiteAssignments");
                 });
 
             modelBuilder.Entity("OpenIddict.Models.OpenIddictApplication", b =>

@@ -12,6 +12,7 @@ using NetSo.Data;
 using NetSo.Models.AdminViewModels;
 using NetSo.Models.ManageViewModels;
 using NetSo.Services;
+using NetSo.Models;
 
 namespace NetSo.Controllers
 {

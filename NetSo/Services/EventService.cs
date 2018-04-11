@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using NetSo.Data;
+using NetSo.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

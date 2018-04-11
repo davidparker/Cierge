@@ -11,9 +11,10 @@ using System;
 namespace NetSo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180411194832_add_more_props_to_Sites")]
+    partial class add_more_props_to_Sites
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -257,28 +258,6 @@ namespace NetSo.Migrations
                     b.ToTable("Sites");
                 });
 
-            modelBuilder.Entity("NetSo.Models.UserSiteAssignment", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ClientId");
-
-                    b.Property<string>("SiteId");
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClientId");
-
-                    b.HasIndex("SiteId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserSiteAssignments");
-                });
-
             modelBuilder.Entity("OpenIddict.Models.OpenIddictApplication", b =>
                 {
                     b.Property<string>("Id")
@@ -469,21 +448,6 @@ namespace NetSo.Migrations
                     b.HasOne("NetSo.Data.ApplicationUser")
                         .WithMany("Sites")
                         .HasForeignKey("ApplicationUserId");
-                });
-
-            modelBuilder.Entity("NetSo.Models.UserSiteAssignment", b =>
-                {
-                    b.HasOne("NetSo.Models.Client", "Client")
-                        .WithMany()
-                        .HasForeignKey("ClientId");
-
-                    b.HasOne("NetSo.Models.Site", "Site")
-                        .WithMany()
-                        .HasForeignKey("SiteId");
-
-                    b.HasOne("NetSo.Data.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("OpenIddict.Models.OpenIddictAuthorization", b =>
