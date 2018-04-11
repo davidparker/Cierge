@@ -30,6 +30,12 @@
     }
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary btn-round">
+        Edit
+        <i class="material-icons">mode_edit</i>
+        </a>
+    <a asp-action="Index" class="btn btn-primary btn-round">
+        <i class="material-icons">arrow_back</i>
+        Back to List
+    </a>
 </div>

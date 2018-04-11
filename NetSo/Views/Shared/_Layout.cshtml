@@ -95,6 +95,13 @@
     asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
     asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"></script>
 
+	<environment include="Development">
+        <link rel="stylesheet" href="~/js/site.js" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/js/site.min.js" asp-append-version="true" />
+    </environment>
+
     @RenderSection("Scripts", required: false)
 
 </html>
