@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Cierge.Models;
+using Cierge.Data;
 
 namespace Cierge.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<AuthEvent> AuthEvents { get; set; }
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<Site> Sites { get; set;  }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -21,8 +24,8 @@ namespace Cierge.Data
             // Add your customizations after calling base.OnModelCreating(builder);
 
             builder.Entity<ApplicationUser>()
-                .HasIndex(nameof(ApplicationUser.Email))
-                .IsUnique(false);
+            .HasIndex(nameof(ApplicationUser.Email))
+            .IsUnique(false);
 
             builder.Entity<AuthEvent>()
                 .HasOne(e => e.User)
@@ -30,5 +33,6 @@ namespace Cierge.Data
                 .HasForeignKey(e => e.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
+
     }
 }

@@ -11,9 +11,10 @@ using System;
 namespace Cierge.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180409160823_added-client-info")]
+    partial class addedclientinfo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,6 +27,8 @@ namespace Cierge.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("AccessFailedCount");
+
+                    b.Property<string>("ClientId");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
@@ -66,6 +69,8 @@ namespace Cierge.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
 
+                    b.Property<string>("clientName");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Email");
@@ -103,46 +108,6 @@ namespace Cierge.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("AuthEvents");
-                });
-
-            modelBuilder.Entity("Cierge.Models.Client", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ApplicationUserId");
-
-                    b.Property<bool>("Enabled");
-
-                    b.Property<string>("SiteId");
-
-                    b.Property<string>("name");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("SiteId");
-
-                    b.ToTable("Clients");
-                });
-
-            modelBuilder.Entity("Cierge.Models.Site", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ApplicationUserId");
-
-                    b.Property<string>("Name");
-
-                    b.Property<string>("Url");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.ToTable("Sites");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -380,24 +345,6 @@ namespace Cierge.Migrations
                         .WithMany("Events")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Cierge.Models.Client", b =>
-                {
-                    b.HasOne("Cierge.Data.ApplicationUser")
-                        .WithMany("Clients")
-                        .HasForeignKey("ApplicationUserId");
-
-                    b.HasOne("Cierge.Models.Site", "Site")
-                        .WithMany("Clients")
-                        .HasForeignKey("SiteId");
-                });
-
-            modelBuilder.Entity("Cierge.Models.Site", b =>
-                {
-                    b.HasOne("Cierge.Data.ApplicationUser")
-                        .WithMany("Sites")
-                        .HasForeignKey("ApplicationUserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

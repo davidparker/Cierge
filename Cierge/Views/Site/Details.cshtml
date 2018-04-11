@@ -1,0 +1,35 @@
+@model Cierge.Models.Site
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+@{
+    Layout = "_LayoutOther";
+}
+<h2 class="card-title text-center">Site Details</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Url)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Url)
+        </dd>
+    </dl>
+    @foreach (var item in Model.Clients)
+    {
+        <span>@Html.DisplayFor(modelItem => item.name)</span><br/>
+    }
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

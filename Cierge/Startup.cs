@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Rewrite;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Collections.Generic;
 
 namespace Cierge
 {
@@ -39,7 +40,9 @@ namespace Cierge
         {
             // Disabling HTTPS requirement is default since it is assumed that
             // this is running behind a reverse proxy that requires HTTPS
-            var requireHttps = !String.IsNullOrWhiteSpace(Configuration["RequireHttps"]) && Boolean.Parse(Configuration["RequireHttps"]) == true;
+            var requireHttps = true;
+
+            if(Env.IsDevelopment()) requireHttps = false;
 
             if (requireHttps)
                 services.Configure<MvcOptions>(options =>
@@ -49,13 +52,17 @@ namespace Cierge
 
             services.AddMvc();
 
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContextPool<ApplicationDbContext>(options =>
             {
-                if (Env.IsDevelopment())
-                    options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]);
-                else
-                    options.UseNpgsql(Configuration["ConnectionStrings:DefaultConnection"]);
-
+                
+                options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"], 
+                sqlServerOptionsAction: sqlOptions =>
+                    {
+                        sqlOptions.EnableRetryOnFailure(
+                        maxRetryCount: 5,
+                        maxRetryDelay: TimeSpan.FromSeconds(30),
+                        errorNumbersToAdd: null);
+                    });
                 options.UseOpenIddict();
             });
 
@@ -149,12 +156,15 @@ namespace Cierge
                 {
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        ValidateIssuer = false, // TODO: make configurable
+                        ValidateIssuer = true, // TODO: make configurable
                         ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = SigningKey
+                        IssuerSigningKey = SigningKey, 
+                        ValidAudiences = new List<string>{
+                            "",
+                            "",
+                            ""
+                        }
                     };
-
-                    options.Audience = Configuration["Cierge:Audience"];
 
                     if (Env.IsDevelopment())
                         options.RequireHttpsMetadata = false;

@@ -8,50 +8,79 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-@if (await UserManager.IsInRoleAsync(await UserManager.GetUserAsync(User), "Administrator"))
-{
-    <div class="row">
-        <div class="column">
-            <a asp-controller="Admin" asp-action="@nameof(AdminController.Index)" class="button button-outline">
-                <i class="fa fa-sliders" aria-hidden="true"></i>&nbsp;
-                Admin panel (beta)
-            </a>
-        </div>
+<h2 class="card-title text-center">Home</h2>
+<div class="row">
+    <div class="col-12">
+        <ul class="nav nav-pills nav-pills-icons nav-stacked" role="tablist">
+            <!--
+                color-classes: "nav-pills-primary", "nav-pills-info", "nav-pills-success", "nav-pills-warning","nav-pills-danger"
+            -->
+            @if (await UserManager.IsInRoleAsync(await UserManager.GetUserAsync(User), "Administrator"))
+            {
+                <li class="active">
+                    <a asp-controller="Admin" asp-action="@nameof(AdminController.Index)" class="button button-outline">
+                        <i class="material-icons">build</i>
+                        Admin panel
+                    </a>
+                </li>
+            }
+            <li class="active">
+                <a asp-controller="Manage" asp-action="@nameof(ManageController.EditUserInfo)" class="button button-outline">
+                    <i class="material-icons">mode_edit</i>
+                    Edit your profile
+                </a>
+            </li>
+            <li class="active">
+                <a asp-controller="Manage" asp-action="@nameof(ManageController.Logins)" class="button button-outline">
+                    <i class="material-icons">verified_user</i>
+                    Manage existing logins
+                </a>
+            </li>
+            <li class="active">
+                <a asp-controller="Account" asp-action="@nameof(AccountController.Login)" class="button button-outline">
+                    <i class="material-icons">supervisor_account</i>
+                    Add more login methods
+                </a>
+            </li>
+            @if (Int32.Parse(Configuration["Cierge:Events:MaxStored"] ?? "50") > 0)
+            {
+                <li class="active">
+                    <a asp-controller="Manage" asp-action="@nameof(ManageController.History)" class="button button-outline">
+                        <i class="material-icons">history</i>
+                        Account history
+                    </a>
+                </li>
+            }
+            @if (await UserManager.IsInRoleAsync(await UserManager.GetUserAsync(User), "Administrator"))
+            {
+                <li class="active">
+                    <a asp-controller="Role" asp-action="@nameof(RoleController.Index)" class="button button-outline">
+                        <i class="material-icons">build</i>
+                        Roles
+                    </a>
+                </li>
+            }
+            @if (await UserManager.IsInRoleAsync(await UserManager.GetUserAsync(User), "Administrator"))
+            {
+                <li class="active">
+                    <a asp-controller="Client" asp-action="@nameof(ClientController.Index)" class="button button-outline">
+                        <i class="material-icons">build</i>
+                        Clients
+                    </a>
+                </li>
+            }
+            @if (await UserManager.IsInRoleAsync(await UserManager.GetUserAsync(User), "Administrator"))
+            {
+                <li class="active">
+                    <a asp-controller="Site" asp-action="@nameof(SiteController.Index)" class="button button-outline">
+                        <i class="material-icons">build</i>
+                        Sites
+                    </a>
+                </li>
+            }
+        </ul>
     </div>
-}
+</div>
 
-<div class="row">
-    <div class="column">
-        <a asp-controller="Manage" asp-action="@nameof(ManageController.EditUserInfo)" class="button button-outline">
-            <i class="fa fa-id-card-o" aria-hidden="true"></i>&nbsp;
-            Edit your profile
-        </a>
-    </div>
-</div>
-<div class="row">
-    <div class="column">
-        <a asp-controller="Manage" asp-action="@nameof(ManageController.Logins)" class="button button-outline">
-            <i class="fa fa-address-book-o" aria-hidden="true"></i>&nbsp;
-            Manage existing logins
-        </a>
-    </div>
-</div>
-<div class="row">
-    <div class="column">
-        <a asp-controller="Account" asp-action="@nameof(AccountController.Login)" class="button button-outline">
-            <i class="fa fa-key" aria-hidden="true"></i>&nbsp;
-            Add more login methods
-        </a>
-    </div>
-</div>
-@if (Int32.Parse(Configuration["Cierge:Events:MaxStored"] ?? "50") > 0)
-{
-    <div class="row">
-        <div class="column">
-            <a asp-controller="Manage" asp-action="@nameof(ManageController.History)" class="button button-outline">
-                <i class="fa fa-history" aria-hidden="true"></i>&nbsp;
-                Account history
-            </a>
-        </div>
-    </div>
-}
+
+

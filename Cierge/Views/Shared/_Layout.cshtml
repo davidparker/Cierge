@@ -6,14 +6,21 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Cierge</title>
+    <title>@ViewData["Title"]</title>
 
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
-    <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
-    <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+    <!--     Fonts and icons     -->
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
 
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-
+    <!-- CSS Files -->
+    <link rel="stylesheet" 
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" 
+    crossorigin="anonymous"
+    asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+    asp-fallback-test-class="sr-only" 
+    asp-fallback-test-property="position" 
+    asp-fallback-test-value="absolute">
 
     <environment include="Development">
         <link rel="stylesheet" href="~/css/site.css" />
@@ -23,18 +30,58 @@
     </environment>
 
 </head>
-<body>
-    <div class="container main">
-        @await Html.PartialAsync("_LoginPartial")
-        @RenderBody()
+<body class="signup-page">
+	
+	<div class="page-header header-filter" filter-color="purple" style="background-image: url('/images/backmain.jpg'); background-size: cover; background-position: top center;">
+    	<div class="container">
+			<div class="row">
+    			<div class="col-md-10 col-md-offset-1">
+
+					<div class="card card-signup">
+                        @await Html.PartialAsync("_LoginPartial")
+                        @RenderBody()
+                	</div>
+
+                </div>
+            </div>
+		</div>
+
+		<footer class="footer">
+	        <div class="container" style="padding-top: 20px!important;">
+	            <nav class="pull-left">
+					<ul>
+						<li>
+							<a href="#">
+								Privacy
+							</a>
+						</li>
+						<li>
+							<a href="#">
+							   Terms of usage
+							</a>
+						</li>
+						<li>
+							<a href="#">
+							   About
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								Support
+							</a>
+						</li>
+					</ul>
+	            </nav>
+	            <div class="copyright pull-right">
+	                &copy; <script>document.write(new Date().getFullYear())</script>, This SSO service is managed and run by NorthEast Technologies Ltd, Company number 11290033
+	            </div>
+	        </div>
+	    </footer>
+
     </div>
-    <footer class="container footer-pad">
-        <a href="@Configuration["Cierge:AppUrl"]" target="_blank">@Configuration["Cierge:AppName"]</a>
-        @if (Boolean.Parse(Configuration["Cierge:BeNice"]))
-        {
-            <em class="float-right"><a href="https://pwdless.github.io/Cierge-Website/" target="_blank">Powered by Cierge</a></em>
-        }
-    </footer>
+
+    
+</body>
 
     <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
             asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
@@ -42,6 +89,12 @@
             crossorigin="anonymous"
             integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
     </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" 
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
+    crossorigin="anonymous" 
+    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"></script>
+
     @RenderSection("Scripts", required: false)
-</body>
+
 </html>

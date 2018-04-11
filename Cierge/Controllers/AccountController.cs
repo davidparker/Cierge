@@ -626,7 +626,7 @@ namespace Cierge.Controllers
         private bool DidReachMaxLoginsAllowed(ApplicationUser user)
         {
             // Check to see if user reached max logins
-
+            
             var userLoginCount = _context.UserLogins.Count(l => l.UserId == user.Id);
             return userLoginCount >= MaxLoginsAllowed;
         }

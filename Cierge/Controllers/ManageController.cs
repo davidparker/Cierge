@@ -87,7 +87,7 @@ namespace Cierge.Controllers
             user.UserName = model.UserName;
             user.FullName = model.FullName;
             user.SendCodesViaSms = model.SendCodesViaSms;
-            user.MobileNumber = user.MobileNumber;
+            user.MobileNumber = model.MobileNumber;
 
             // If the user's email is confirmed (ie. local login) and they provided a different email that exists, set it to the primary
             if (user.EmailConfirmed &&

@@ -19,5 +19,9 @@ namespace Cierge.Data
         public string MobileNumber{ get; set; }
 
         public bool SendCodesViaSms{ get; set; }
+        
+        public ICollection<Site> Sites { get; set; }
+
+        public ICollection<Client> Clients { get; set; }
     }
 }
