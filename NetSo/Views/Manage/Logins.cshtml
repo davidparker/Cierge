@@ -2,63 +2,66 @@
 @{
     ViewData["Title"] = "Manage your external logins";
 }
+@{
+    Layout = "_LayoutOther";
+}
+<h2 class="card-title text-center">My existing logins</h2>
 
-<div class="row">
-    <div class="column">
-        <h3 style="display:inline;">My existing logins</h3>
-        <a asp-controller="Account" asp-action="Login" class="button button-clear float-right">
-            <i class="fa fa-key" aria-hidden="true"></i>&nbsp;
-            Add more login methods
-        </a>
-    </div>
-</div>
+<a asp-controller="Account" asp-action="Login" class="btn btn-primary btn-round">
+    <i class="material-icons">vpn_key</i>&nbsp;
+    Add more login methods
+</a>
 
-<br />
-
+<table class="table">
+    <thead>
+        <tr>
+            <th>Provider Name</th>
+            <th>Details</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
 @foreach (var login in Model.Logins)
 {
-    <div class="row">
-        <div class="column">
-            @login.ProviderDisplayName
-
-            @if (login.LoginProvider == "Email")
-            {
-                <span>(@login.ProviderKey.ToLower().Substring(0, Math.Min(20, login.ProviderKey.Length)))</span>
-            }
-            else
-            {
-                <span>(@login.ProviderKey.Substring(0, Math.Min(5, login.ProviderKey.Length)))</span>
-            }
-
-        </div>
-        <div class="column">
-            <form asp-action="@nameof(ManageController.RemoveLogin)" method="post">
-                <input asp-for="@login.LoginProvider" name="LoginProvider" type="hidden" />
-                <input asp-for="@login.ProviderKey" name="ProviderKey" type="hidden" />
-                @if (Model.Logins.Count == 1 || 
-                    (Model.Logins.Where(l => l.LoginProvider == "Email").Count() == 1 && login.LoginProvider == "Email"))
+        <tr>
+            <td>@login.ProviderDisplayName</td>
+            <td>
+                @if (login.LoginProvider == "Email")
                 {
-                    <button type="submit" class="button button-clear"
-                            style="margin:0px;padding:0px;"
-                            title="Permanently delete your account">
-                        <i class="fa fa-trash-o" aria-hidden="true"></i>&nbsp;
-                        Delete Account&nbsp;
-                        <small class="text-danger">(No undo)</small>
-                    </button>
+                    <span>@login.ProviderKey.ToLower().Substring(0, Math.Min(20, login.ProviderKey.Length))</span>
                 }
                 else
                 {
-                    <button type="submit" class="button button-clear"
-                            style="margin:0px;padding:0px;"
-                            title="Remove this @login.LoginProvider login from your account">
-                        <i class="fa fa-trash-o" aria-hidden="true"></i>&nbsp;
-                        Remove
-                    </button>
+                    <span>@login.ProviderKey.Substring(0, Math.Min(5, login.ProviderKey.Length))</span>
                 }
-            </form>
-        </div>
-    </div>
+            </td>
+            <td>
+                <form asp-action="@nameof(ManageController.RemoveLogin)" method="post">
+                    <input asp-for="@login.LoginProvider" name="LoginProvider" type="hidden" />
+                    <input asp-for="@login.ProviderKey" name="ProviderKey" type="hidden" />
+                    @if (Model.Logins.Count == 1 || 
+                        (Model.Logins.Where(l => l.LoginProvider == "Email").Count() == 1 && login.LoginProvider == "Email"))
+                    {
+                        <button type="submit" class="btn btn-danger btn-round" title="Permanently delete your account">
+                            <i class="material-icons">delete_forever</i>
+                            Delete Account&nbsp;
+                            <small>(No undo)</small>
+                        </button>
+                    }
+                    else
+                    {
+                        <button type="submit" class="btn btn-danger btn-round" title="Remove this @login.LoginProvider login from your account">
+                            <i class="material-icons">delete_forever</i>
+                            Remove
+                        </button>
+                    }
+                </form>
+            </td>
+        </tr>
 }
+
+    </tbody>
+</table>
 
 
 

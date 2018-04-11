@@ -9,10 +9,18 @@
 }
 <h2 class="card-title text-center">My Profile</h2>
 
+<a asp-controller="Account" asp-action="Login" class="btn btn-primary btn-round">
+    <i class="material-icons">vpn_key</i>&nbsp;
+    Add more login methods
+</a>
+<a asp-controller="Manage" asp-action="@nameof(ManageController.Logins)" class="btn btn-primary btn-round">
+    <i class="material-icons">assignment</i>&nbsp;
+    Manage existing Logins
+</a>
 
 <form method="post" role="form">
     
-    <div asp-validation-summary="All" class="alert alert-danger"></div>
+    <div asp-validation-summary="All" class="text-danger"></div>
 
     <input asp-for="Logins" type="hidden" value="@Model.Logins" /> <!-- Doesn't actually send a list. You have to recompute. -->
     <input asp-for="EmailConfirmed" type="hidden" value="@Model.EmailConfirmed" />
